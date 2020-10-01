@@ -1,58 +1,42 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import {NavigationContainer} from "@react-navigation/native";
-import {createStackNavigator} from "@react-navigation/stack";
-import { AntDesign } from '@expo/vector-icons'; 
-const Tab = createBottomTabNavigator();
+import { StyleSheet, Text, View, Button, TabBarIOS } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const Messages = () => {
-  return (
-    <View style={styles.container}>
-      {Messages.map(mess => (
-        <View style={styles.messageContainer}>
-          <View style={styles.authorText}>
-            {}
-          </View>
-        </View>
-      ))}
-    </View>
-  )
-}
-<Text>Messages</Text>;
-const Contacts = () => <Text>Contacts</Text>;
-const Groups() = () => <Text>Groups</Text>;
-const Timeline =() => <Text>Timeline</Text>;
-const More = () => <Text>More</Text>;
+const routeIcons = {
+  Messages: "message1",
+  Contacts: "contacts",
+  Groups: "team",
+  Timeline: "barschart",
+  More: "bars"
+};
+
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused }) => {
+        screenOptions={({route}) => ({
+          tabBarIcon: ({ focused }) => (
             <AntDesign
-              name={routeIcons[`${route.name}`]}
-              size={24}
-              color={focused ? "blue":"grey"}
-            >
-            </AntDesign>
-          ),
-        }}}
+              name = {routeIcons[route.name]}
+              size = {24}
+              color = {focused ? "blue" : "grey"}
+            />
+          )
+        })}
+        
         tabBarOptions={{
           activeTintColor: "blue",
-          inactiveTintColor: "grey",
+          inactiveTintColor: "grey"
         }}
       >
-        <Tab.Screen options={{tabBarIcon: () => {
-          <AntDesign name="message1" size={24} color="black"/>
-        }}} name="Messages" component={Messages}/>
-        <Tab.Screen name="Contacts" component={Contacts}/>
-        <Tab.Screen name="Groups" component={Groups}/>
-        <Tab.Screen name="Timeline" component={Timeline}/>
-        <Tab.Screen name="More" component={More}/>
       </Tab.Navigator>
-    </NavigationContainer>
+    </NavigationContainer>  
   );
 }
 
