@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button, TabBarIOS } from 'react-native';
+import { StyleSheet, Text, View, Button, TabBarIOS, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -81,9 +81,34 @@ export default function App() {
           inactiveTintColor: "grey"
         }}
       >
+        <Tab.Screen name="Messages" component={MessagesStack}/>
       </Tab.Navigator>
     </NavigationContainer>  
   );
+}
+
+const MessagesStack = () => {
+  return (
+    <Stack.Navigator initialRouteName="Messages">
+      <Stack.Screen name="Messages" component={Messages}></Stack.Screen>
+    </Stack.Navigator>
+  )
+}
+
+const Messages = ({navigation}) => {
+  return(
+    <View style={styles.container}>
+      {messages => map((mess) => (
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Conversation", mess)}
+          style={styles.messageContainer}
+        >
+          <Text style={styles.authorText}>{mess.author}</Text>
+          <Text>{mess.content}</Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
