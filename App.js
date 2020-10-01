@@ -42,23 +42,6 @@ const messages = [
   { author: "Greenwood", content: "Goallllllllllllllllll" },
 ];
 
-const Messages = ({navigation}) => {
-  return (
-    <View style={styles.container}>
-      {messages.map((mess)=>(
-        <TouchableOpacity
-        onPress={()=>navigation.navigate("Conversation", mess)}
-        style={styles.messageContainer}>
-          <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-            {mess.author}
-          </Text>
-          <Text>{mess.content}</Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-  );
-};
-
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -91,6 +74,7 @@ const MessagesStack = () => {
   return (
     <Stack.Navigator initialRouteName="Messages">
       <Stack.Screen name="Messages" component={Messages}></Stack.Screen>
+      <Stack.Screen name="Conversation" component={Conversation}></Stack.Screen>
     </Stack.Navigator>
   )
 }
@@ -107,6 +91,16 @@ const Messages = ({navigation}) => {
           <Text>{mess.content}</Text>
         </TouchableOpacity>
       ))}
+    </View>
+  )
+}
+
+const Conversation = ({route}) => {
+  return(
+    <View style={styles.container}>
+      <Text>Conversation</Text>
+      <Text>{route.params?.author}</Text>
+      <Text>{route.params?.content}</Text>
     </View>
   )
 }
