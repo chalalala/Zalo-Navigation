@@ -14,3 +14,4 @@ We're going to clone Zalo. Our app will help users see a lot of unique content b
 ## Rockets 🚀
 [ ] User can press on a a users profile image inside of the `Messages` screen to be directed to a profile screen.
 [ ] User can press a link within their drawer to go to a `Settings` screen.
+
